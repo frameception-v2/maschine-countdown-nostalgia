@@ -77,6 +77,11 @@ export default function Frame() {
         addFrame();
       }
 
+      // Update view state if needed
+      if (currentView !== 'main') {
+        setCurrentView('main');
+      }
+
       sdk.on("frameAdded", ({ notificationDetails }) => {
         setAdded(true);
       });
