@@ -41,10 +41,10 @@ function ExampleCard() {
 export default function Frame() {
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
   const [context, setContext] = useState<Context.FrameContext>();
-
   const [added, setAdded] = useState(false);
-
   const [addFrameResult, setAddFrameResult] = useState("");
+  const [currentView, setCurrentView] = useState("main");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const addFrame = useCallback(async () => {
     try {
