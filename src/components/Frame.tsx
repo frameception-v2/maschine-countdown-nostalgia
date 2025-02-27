@@ -97,8 +97,19 @@ export default function Frame() {
         console.log("notificationsDisabled");
       });
 
-      sdk.on("primaryButtonClicked", () => {
-        console.log("primaryButtonClicked");
+      sdk.on("primaryButtonClicked", async () => {
+        try {
+          setErrorMessage(null);
+          if (currentView === "main") {
+            setCurrentView("details");
+          } else {
+            // Handle other views
+            setCurrentView("main");
+          }
+        } catch (error) {
+          console.error("Button click error:", error);
+          setErrorMessage("Failed to process action");
+        }
       });
 
       console.log("Calling ready");
@@ -137,10 +148,36 @@ export default function Frame() {
       }}
     >
       <div className="w-[300px] mx-auto py-2 px-2">
-        <h1 className="text-2xl font-bold text-center mb-4 text-gray-700 dark:text-gray-300">
-          {PROJECT_TITLE}
-        </h1>
-        <ExampleCard />
+        {errorMessage && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+            {errorMessage}
+          </div>
+        )}
+        
+        {currentView === "main" ? (
+          <>
+            <h1 className="text-2xl font-bold text-center mb-4 text-gray-700 dark:text-gray-300">
+              {PROJECT_TITLE}
+            </h1>
+            <ExampleCard />
+            <button 
+              onClick={() => setCurrentView("details")}
+              className="mt-4 w-full bg-purple-600 text-white py-2 rounded hover:bg-purple-700"
+            >
+              Continue
+            </button>
+          </>
+        ) : (
+          <div className="bg-white p-4 rounded-lg shadow">
+            <h2 className="text-xl font-bold mb-4">Details View</h2>
+            <button
+              onClick={() => setCurrentView("main")}
+              className="mt-4 w-full bg-gray-600 text-white py-2 rounded hover:bg-gray-700"
+            >
+              Back
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

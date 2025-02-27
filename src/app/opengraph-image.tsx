@@ -111,11 +111,13 @@ Please refer to Satori’s documentation for a list of supported HTML and CSS fe
   return new ImageResponse(
     (
       <div
-        tw="h-full w-full flex flex-col justify-center items-center relative"
+        tw="h-full w-full flex flex-col justify-center items-center relative p-8"
         style={BACKGROUND_GRADIENT_STYLE}
       >
-        <h1 tw="text-9xl text-center font-semibold">{PROJECT_TITLE}</h1>
-        <h3 tw="text-4xl font-normal">{PROJECT_DESCRIPTION}</h3>
+        <div tw="absolute top-0 left-0 right-0 h-2 bg-white opacity-20" />
+        <h1 tw="text-8xl text-center font-semibold mb-6">{PROJECT_TITLE}</h1>
+        <h3 tw="text-3xl text-center font-normal max-w-[800px]">{PROJECT_DESCRIPTION}</h3>
+        <div tw="absolute bottom-0 left-0 right-0 h-2 bg-white opacity-20" />
       </div>
     ),
     options
